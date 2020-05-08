@@ -1,0 +1,7 @@
+First name: 	1
+Last name: 		2
+Email: 			3
+Request Number: 4
+Cost: 			5
+Product Type: 	6
+Status: 		7
