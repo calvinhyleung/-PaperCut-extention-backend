@@ -38,7 +38,7 @@ function printTest(request, response){
         console.log('Information > label.txt');
       });
     console.log("printing...");
-    
+    //
     //run shell command 
     //if connected to printer, use command 
     //"cupsenable DYMO_LabelWriter_450_Turbo && lp label.txt"
