@@ -18,6 +18,30 @@ function listening(){
 // use Morgan to log requests
 app.use(logger("short"));
 
+// use express,json()
+app.use(express.json());
+app.post('/label', function(request, response){
+    //console.log(request.body.name);
+    var data = request.body;
+    var firstName = data.firstName;
+    var lastName = data.lastName;
+    var email = data.email;
+    var requestNumber = data.requestNumber;
+    var cost = data.cost;
+    var productType = data.productType;
+    var status = data.status; 
+    var replyFull = firstName + "\n" + lastName + "\n" + email + "\n" + requestNumber + "\n" + cost + "\n" + productType + "\n" + status;
+    response.send("printing label...");
+    fs.writeFile('label.txt', replyFull, function (err) {
+        if (err) return console.log(err);
+        console.log('Writing information to label.txt');
+        
+    });
+    //
+    // run shell command 
+    //
+});
+
 //routing for label printing 
 app.get('/print/:firstName/:lastName/:email/:requestNumber/:cost/:productType/:status', printTest);
 function printTest(request, response){
@@ -55,13 +79,3 @@ function printTest(request, response){
     });
     //console.log("success");
 }
-/*
-app.get('/changeFirst/:first', printTest);
-function printTest(request, response){
-    var data = request.params;
-    var first = data.first;
-    var cost = data.cost;
-    var reply = first+" "+cost
-    response.send(reply);
-    console.log("printing...");
-}*/
