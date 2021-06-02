@@ -20,46 +20,60 @@ app.use(logger("short"));
 
 // use express,json()
 app.use(express.json());
-app.post('/label', function(request, response){
-    //console.log(request.body.name);
+app.post('/', function(request, response){
     var data = request.body;
-    var firstName = data.firstName;
-    var lastName = data.lastName;
+    var first_name = data.first_name;
+    var last_name = data.last_name;
     var email = data.email;
-    var requestNumber = data.requestNumber;
+    var papercut_num = data.papercut_num;
     var cost = data.cost;
-    var productType = data.productType;
-    var status = data.status; 
-    var replyFull = firstName + "\n" + lastName + "\n" + email + "\n" + requestNumber + "\n" + cost + "\n" + productType + "\n" + status;
-    response.send("printing label...");
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    var yyyy = today.getFullYear();
+    today = mm + '/' + dd + '/' + yyyy;
+    //var productType = data.productType;
+    //var status = data.status; 
+    var replyFull = first_name + "\n" + last_name + "\n" + email + "\n" + papercut_num + "\n" + cost + "\n" + today;
+    console.log("\nJSON received\n");
+    console.log(data);
+    console.log("\n");
+    response.send("\nPOST printing label...");
     fs.writeFile('label.txt', replyFull, function (err) {
         if (err) return console.log(err);
-        console.log('Writing information to label.txt');
+        console.log('POST Writing information to label.txt');
+        console.log(replyFull);
         
     });
     //
-    // run shell command 
-    //
+    //run shell command 
+    //if connected to printer, use the following command 
+    //"cupsenable DYMO_LabelWriter_450_Turbo && lp label.txt"
 });
-
+app.get('/validation', valid);
+function valid(request, response){
+    response.send("My IP");
+}
 //routing for label printing 
-app.get('/print/:firstName/:lastName/:email/:requestNumber/:cost/:productType/:status', printTest);
+app.get('/print/:first_name/:last_name/:email/:papercut_num/:cost/:productType/:status', printTest);
 function printTest(request, response){
     var data = request.params;
-    var firstName = data.firstName;
-    var lastName = data.lastName;
+    var first_name = data.first_name;
+    var last_name = data.last_name;
     var email = data.email;
-    var requestNumber = data.requestNumber;
+    var papercut_num = data.papercut_num;
     var cost = data.cost;
     var productType = data.productType;
     var status = data.status; 
-    var reply = firstName + "\n" + lastName + "\n" + email + "\n" + requestNumber + "\n" + cost + "\n" + productType + "\n" + status;
-    var replyFull = "First name: \t" + firstName + "\n" + "Last name: \t\t" + lastName + "\n" + "Email: \t\t\t" + email + "\n" + "Request Number: " + requestNumber + "\n" + "Cost: \t\t\t" + cost + "\n" + "Product Type: \t" + productType + "\n" + "Status: \t\t" + status;
+    var reply = first_name + "\n" + last_name + "\n" + email + "\n" + papercut_num + "\n" + cost + "\n" + productType + "\n" + status;
+    console.log(data);
+    var replyFull = "First name: \t" + first_name + "\n" + "Last name: \t\t" + last_name + "\n" + "Email: \t\t\t" + email + "\n" + "Request Number: " + papercut_num + "\n" + "Cost: \t\t\t" + cost + "\n" + "Product Type: \t" + productType + "\n" + "Status: \t\t" + status;
+    
     response.send(replyFull);
     //write text file with label info
     fs.writeFile('label.txt', replyFull, function (err) {
         if (err) return console.log(err);
-        console.log('Information > label.txt');
+        console.log('GET Writing information to label.txt');
       });
     console.log("printing...");
     //
