@@ -49,11 +49,27 @@ app.post('/', function(request, response){
     //run shell command 
     //if connected to printer, use the following command 
     //"cupsenable DYMO_LabelWriter_450_Turbo && lp label.txt"
+    exec("lp label.txt", (error, stdout, stderr) => {
+        if (error) {
+            console.log(`error: ${error.message}`);
+            return;
+        }
+        if (stderr) {
+            console.log(`stderr: ${stderr}`);
+            return;
+        }
+        console.log(`stdout: ${stdout}`);
+    });
+    //console.log("success");
 });
-app.get('/validation', valid);
+
+// Get request for pinging the Raspberry Pi 
+app.get('/ping', valid);
 function valid(request, response){
     response.send("My IP");
 }
+
+
 //routing for label printing 
 app.get('/print/:first_name/:last_name/:email/:papercut_num/:cost/:productType/:status', printTest);
 function printTest(request, response){
