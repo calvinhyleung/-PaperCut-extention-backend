@@ -33,6 +33,7 @@ app.use(function(req, res, next) {
     } else if ('POST' === req.method) {
         res.send("success");
         var data = req.body;
+        console.log(data);
         var first_name = data.first_name;
         var last_name = data.last_name;
         var email = data.email;
