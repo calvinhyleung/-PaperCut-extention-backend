@@ -28,12 +28,60 @@ app.use(function(req, res, next) {
     //intercepts OPTIONS method
     if ('OPTIONS' === req.method) {
       //respond with 200
-      res.send("options");
-    }
-    if ('GET' === req.method) {
+      res.send("success");
+    } else if ('GET' === req.method) {
         //respond with 200
-        res.send("options");
-      }
+        res.send("success");
+    } else if ('GET' === req.method) {
+        //respond with 200
+        res.send("success");
+        var data = request.body;
+        var first_name = data.first_name;
+        var last_name = data.last_name;
+        var email = data.email;
+        var papercut_num = data.papercut_num;
+        var cost = data.cost;
+        var today = new Date();
+        var dd = String(today.getDate()).padStart(2, '0');
+        var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+        var yyyy = today.getFullYear();
+        today = mm + '/' + dd + '/' + yyyy;
+        //var productType = data.productType;
+        //var status = data.status; 
+        var replyFull
+            = "Last:  " + last_name + "\n" 
+            + "First: " + first_name + "\n"  
+            + "PC #:  " + papercut_num + "\n" 
+            + "Cost:  $" + cost + "\n" 
+            + "Date:  " + today + "\n" 
+            + "Email: " + "\n" 
+            + email ;
+        console.log("\nJSON received\n");
+        console.log(data);
+        console.log("\n");
+        response.send("\nPOST printing label...");
+        fs.writeFile('label.txt', replyFull, function (err) {
+            if (err) return console.log(err);
+            console.log('POST Writing information to label.txt');
+            console.log(replyFull);
+            
+        });
+        //
+        //run shell command 
+        //if connected to printer, use the following command 
+        //"cupsenable DYMO_LabelWriter_450_Turbo && lp label.txt"
+        exec("lp label.txt", (error, stdout, stderr) => {
+            if (error) {
+                console.log(`error: ${error.message}`);
+                return;
+            }
+            if (stderr) {
+                console.log(`stderr: ${stderr}`);
+                return;
+            }
+            console.log(`stdout: ${stdout}`);
+        });
+    }
     // else {
     // //move on
     //   next();
