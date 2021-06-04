@@ -34,7 +34,13 @@ app.post('/', function(request, response){
     today = mm + '/' + dd + '/' + yyyy;
     //var productType = data.productType;
     //var status = data.status; 
-    var replyFull = first_name + "\n" + last_name + "\n" + email + "\n" + papercut_num + "\n" + cost + "\n" + today;
+    var replyFull
+        = "Last:  " + last_name + "\n" 
+        + "First: " + first_name + "\n"  
+        + "Email: " + email + "\n" 
+        + "PC #:  " + papercut_num + "\n" 
+        + "Cost:  " + cost + "\n" 
+        + "Date:  " + today;
     console.log("\nJSON received\n");
     console.log(data);
     console.log("\n");
