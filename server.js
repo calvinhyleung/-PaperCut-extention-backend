@@ -64,9 +64,9 @@ app.post('/', function(request, response){
 });
 
 // Get request for pinging the Raspberry Pi 
-app.get('/ping', valid);
+app.get('/validate', valid);
 function valid(request, response){
-    response.send("My IP");
+    response.send("success");
 }
 
 
