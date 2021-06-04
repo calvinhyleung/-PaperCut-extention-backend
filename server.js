@@ -30,6 +30,10 @@ app.use(function(req, res, next) {
       //respond with 200
       res.send("options");
     }
+    if ('GET' === req.method) {
+        //respond with 200
+        res.send("options");
+      }
     // else {
     // //move on
     //   next();
