@@ -39,7 +39,7 @@ app.post('/', function(request, response){
         + "First: " + first_name + "\n"  
         + "Email: " + email + "\n" 
         + "PC #:  " + papercut_num + "\n" 
-        + "Cost:  " + cost + "\n" 
+        + "Cost:  $" + cost + "\n" 
         + "Date:  " + today;
     console.log("\nJSON received\n");
     console.log(data);
