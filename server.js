@@ -125,7 +125,7 @@ app.post('/', function(request, response){
     console.log("\nJSON received\n");
     console.log(data);
     console.log("\n");
-    response.send("\nPOST printing label...");
+    response.send("POST printing label...");
     fs.writeFile('label.txt', replyFull, function (err) {
         if (err) return console.log(err);
         console.log('POST Writing information to label.txt');
