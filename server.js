@@ -8,6 +8,8 @@ fs = require('fs');
 //makes an express app  
 const app = express();
 
+
+
 // open port 3000 for a server 
 const server = app.listen(3000, listening);
 
@@ -18,6 +20,9 @@ function listening(){
 
 // use Morgan to log requests
 app.use(logger("short"));
+
+//use cors 
+app.use(cors()); 
 
 // //options request 
 // app.use(function(req, res, next) {
