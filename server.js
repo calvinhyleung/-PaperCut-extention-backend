@@ -37,10 +37,11 @@ app.post('/', function(request, response){
     var replyFull
         = "Last:  " + last_name + "\n" 
         + "First: " + first_name + "\n"  
-        + "Email: " + email + "\n" 
         + "PC #:  " + papercut_num + "\n" 
         + "Cost:  $" + cost + "\n" 
-        + "Date:  " + today;
+        + "Date:  " + today; + "\n" 
+        + "Email: " + "\n" 
+        + email  
     console.log("\nJSON received\n");
     console.log(data);
     console.log("\n");
