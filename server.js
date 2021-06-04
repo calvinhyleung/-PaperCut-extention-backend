@@ -32,7 +32,7 @@ app.use(function(req, res, next) {
         res.send("success");
     } else if ('POST' === req.method) {
         res.send("success");
-        var data = request.body;
+        var data = req.body;
         var first_name = data.first_name;
         var last_name = data.last_name;
         var email = data.email;
