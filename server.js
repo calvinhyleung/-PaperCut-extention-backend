@@ -32,7 +32,7 @@ app.use(function(req, res, next) {
     } else if ('GET' === req.method) {
         //respond with 200
         res.send("success");
-    } else if ('GET' === req.method) {
+    } else if ('POST' === req.method) {
         //respond with 200
         res.send("success");
         var data = request.body;
