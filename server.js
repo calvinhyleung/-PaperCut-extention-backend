@@ -27,13 +27,10 @@ app.use(function(req, res, next) {
 
     //intercepts OPTIONS method
     if ('OPTIONS' === req.method) {
-      //respond with 200
       res.send("success");
     } else if ('GET' === req.method) {
-        //respond with 200
         res.send("success");
     } else if ('POST' === req.method) {
-        //respond with 200
         res.send("success");
         var data = request.body;
         var first_name = data.first_name;
